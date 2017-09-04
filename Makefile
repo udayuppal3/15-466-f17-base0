@@ -3,7 +3,7 @@
 UNAME=$(shell uname -s)
 ifeq ($(UNAME),Darwin)
 	#OSX/llvm
-	CPP=clang++ -std=c++14 -g -Wall -Werror
+	CPP=clang++ -std=c++14 -g -Wall -Werror -I/usr/local/include
 	SDL_LIBS=`sdl2-config --libs` -framework OpenGL
 else
 	#assume Linux/g++

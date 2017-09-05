@@ -1,84 +1,17 @@
-# Base0
+# Game0
 
-Base0 is the starter code for the game0 in the 15-466-f17 course. It was developed by Jim McCann, and is hereby released into the public domain.
+This is Game0 as implemented by Uday Uppal, through a fork of the Base0 code by Jim McCann.
 
-Note that Base0 is attempting to illustrate a very straightfoward "get it done" philosophy of game code design -- I've purposefully removed some of the conveniences one typically uses to sweep things under the rug.
+## The Game
 
-This is because game0 *does not need* such conveniences. It is simple because game0 is simple.
+Tennis For One (Default), see http://graphics.cs.cmu.edu/courses/15-466-f17/game0-design/
 
-## Requirements
+As described in the design document, this is a single player game in which the player must direct a ball into the target area on the left of the screen, using a paddle on the right of the screen, controllable by the mouse. The ball starts at the center of the screen, and begins moving to the right with some random vertical velocity when the mouse is clicked. The player must then bounce the ball off the paddle and the top, left, and bottom walls in a way to get the ball into the target area.
+If the ball hits the target area, the score goes up by one, and the next stage is loaded. Each stage gets progressively harder as the target area gets smaller. The player can begin the next stage by clicking the mouse button. 
+If the ball goes past the paddle on the right, the player loses a life. Upon losing three lives, the game ends and the loss screen is displayed with the player score. If instead the player manages to score 99 points without losing 3 lives, the game is won and the win screen is displayed with the end score of 99 points.
+During gameplay, the score is displayed in blue in the top left of the screen, and the number of lives remaining is in red in the top right.
+The game can be quit by closing the application, hitting escape, or mouse clicking on a game over screen (win or loss).
 
- - modern C++ compiler
- - glm
- - libSDL2
+## Building
 
-On Linux or OSX these requirements should be available from your package manager without too much hassle.
-
-## Building (Local Libraries)
-
-If you are building on a system where you are unable to install libraries, you may wish to use one of the pre-built library repositories:
-
-### Linux
-
-Clone [kit-libs-linux](https://github.com/ixchow/kit-libs-linux) into the `kit-libs-linux` subdirectory:
-```
-  git clone https://github.com/ixchow/kit-libs-linux
-```
-Now you can build using the '.local' Makefile:
-```
-  make -f Makefile.local
-```
-
-### OSX
-
-Clone [kit-libs-osx](https://github.com/ixchow/kit-libs-osx) into the `kit-libs-osx` subdirectory:
-```
-  git clone https://github.com/ixchow/kit-libs-osx
-```
-Now you can build using the '.local' Makefile:
-```
-  make -f Makefile.local
-```
-
-### Windows
-
-Clone [kit-libs-win](https://github.com/ixchow/kit-libs-win) into the `kit-libs-win` subdirectory:
-```
-  git clone https://github.com/ixchow/kit-libs-win
-```
-Now you can:
-```
-  nmake -f Makefile.win
-```
-or:
-```
-  cl.exe /EHsc /W3 /WX /MD /Ikit-libs-win\out\include /Ikit-libs-win\out\include\SDL2 main.cpp Draw.cpp gl_shims.cpp /link /SUBSYSTEM:CONSOLE /LIBPATH:kit-libs-win\out\lib SDL2main.lib SDL2.lib OpenGL32.lib
-  copy kit-libs-win\out\dist\SDL2.dll .
-```
-
-
-## Building (System Libraries)
-
-If you are building on a system where you can install libraries easily, then you may wish to build against versions of the required libraries installed by your favorite package manager.
-
-### Linux
-```
-  g++ -g -Wall -Werror -o main main.cpp Draw.cpp `sdl2-config --cflags --libs` -lGL
-```
-or:
-```
-  make
-```
-
-### OSX
-```
-  clang++ -g -Wall -Werror -o main main.cpp Draw.cpp `sdl2-config --cflags --libs`
-```
-or:
-```
-  make
-```
-
-### Windows
-
-Every scheme I am aware of for "globally installing" libraries on Windows seems like a hack.
+There is a Makefile included that is used to build the game. It is the same as the original Makefile from the Base0 fork, however it includes one extra command line option for OS X, that adds usr/local/include to the list of include directories checked. Besides that, the game is built by just using the make command.
